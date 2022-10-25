@@ -1,5 +1,6 @@
 package hooyn.routing_datasource.routingconfig;
 
+
 import com.zaxxer.hikari.HikariDataSource;
 import hooyn.routing_datasource.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "hooyn.routing_datasource.repository",
+        basePackages = "hooyn.routing_datasource",
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager"
 )
@@ -33,14 +34,15 @@ public class DatabaseSourceConfig {
     public DataSource dataSource(){
         DatabaseSourceRouting databaseSourceRouting = new DatabaseSourceRouting();
         databaseSourceRouting.setTargetDataSources(targetDataSources());
-        databaseSourceRouting.setDefaultTargetDataSource(company01DatabaseSource());
+        databaseSourceRouting.setDefaultTargetDataSource(company01DataSource());
+        databaseSourceRouting.setDefaultTargetDataSource(company02DataSource());
         return databaseSourceRouting;
     }
 
     private Map<Object, Object> targetDataSources(){
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DatabaseEnum.COMPANY01, company01DatabaseSource());
-        targetDataSources.put(DatabaseEnum.COMPANY02, company02DatabaseSource());
+        targetDataSources.put(DatabaseEnum.COMPANY01, company01DataSource());
+        targetDataSources.put(DatabaseEnum.COMPANY02, company02DataSource());
         return targetDataSources;
     }
 
@@ -51,7 +53,7 @@ public class DatabaseSourceConfig {
     }
 
     @Bean
-    public DataSource company01DatabaseSource(){
+    public DataSource company01DataSource(){
         return company01DatabaseSourceProperties()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
@@ -60,13 +62,13 @@ public class DatabaseSourceConfig {
 
     @Bean
     @ConfigurationProperties("spring.datasource.company02")
-    public DataSourceProperties company02DatabaseSourceProperties(){
+    public DataSourceProperties company02DataSourceProperties(){
         return new DataSourceProperties();
     }
 
     @Bean
-    public DataSource company02DatabaseSource(){
-        return company02DatabaseSourceProperties()
+    public DataSource company02DataSource(){
+        return company02DataSourceProperties()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
                 .build();

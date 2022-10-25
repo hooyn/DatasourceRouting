@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table
+@Table(name = "users")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,10 +17,10 @@ public class User {
     private Long id;
 
     @Column()
-    private String userName;
+    private String username;
 
     @Builder
-    public User(String userName) {
-        this.userName = userName;
+    public User(String username) {
+        this.username = username;
     }
 }
