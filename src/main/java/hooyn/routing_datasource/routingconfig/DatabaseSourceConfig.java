@@ -1,11 +1,12 @@
 package hooyn.routing_datasource.routingconfig;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder;
+import hooyn.routing_datasource.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -32,7 +33,7 @@ public class DatabaseSourceConfig {
     public DataSource dataSource(){
         DatabaseSourceRouting databaseSourceRouting = new DatabaseSourceRouting();
         databaseSourceRouting.setTargetDataSources(targetDataSources());
-        databaseSourceRouting.setDefaultTargetDataSource(companyDatabaseSource());
+        databaseSourceRouting.setDefaultTargetDataSource(company01DatabaseSource());
         return databaseSourceRouting;
     }
 
