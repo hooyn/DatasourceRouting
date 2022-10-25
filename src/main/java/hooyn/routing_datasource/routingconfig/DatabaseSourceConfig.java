@@ -35,7 +35,6 @@ public class DatabaseSourceConfig {
         DatabaseSourceRouting databaseSourceRouting = new DatabaseSourceRouting();
         databaseSourceRouting.setTargetDataSources(targetDataSources());
         databaseSourceRouting.setDefaultTargetDataSource(company01DataSource());
-        databaseSourceRouting.setDefaultTargetDataSource(company02DataSource());
         return databaseSourceRouting;
     }
 
