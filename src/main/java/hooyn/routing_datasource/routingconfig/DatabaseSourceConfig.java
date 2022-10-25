@@ -2,6 +2,7 @@ package hooyn.routing_datasource.routingconfig;
 
 
 import com.zaxxer.hikari.HikariDataSource;
+import hooyn.routing_datasource.domain.Memo;
 import hooyn.routing_datasource.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,7 +35,7 @@ public class DatabaseSourceConfig {
     public DataSource dataSource(){
         DatabaseSourceRouting databaseSourceRouting = new DatabaseSourceRouting();
         databaseSourceRouting.setTargetDataSources(targetDataSources());
-        databaseSourceRouting.setDefaultTargetDataSource(company01DataSource());
+        databaseSourceRouting.setDefaultTargetDataSource(company02DataSource());
         return databaseSourceRouting;
     }
 
@@ -76,7 +77,9 @@ public class DatabaseSourceConfig {
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(
             EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(dataSource()).packages(User.class)
+        return builder.dataSource(dataSource())
+                .packages(User.class)
+                .packages(Memo.class)
                 .build();
     }
 

@@ -11,16 +11,17 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class Memo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column()
-    private String username;
+    private String content;
 
     @Builder
-    public User(String username) {
-        this.username = username;
+    public Memo(String content) {
+        this.content = content;
     }
 }
