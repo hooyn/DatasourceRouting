@@ -21,14 +21,14 @@ public class MemoController {
     private final MemoRepository memoRepository;
 
     @PostMapping("/memo")
-    public ResponseEntity<?> insertUser(@RequestParam String content) {
+    public ResponseEntity<?> insertMemo(@RequestParam String content) {
         Memo memo = Memo.builder().content(content).build();
         memoRepository.save(memo);
         return new ResponseEntity<>("Success Insert Memo Data", HttpStatus.OK);
     }
 
     @GetMapping("/memo")
-    public ResponseEntity<?> selectUser() {
+    public ResponseEntity<?> selectMemo() {
         List<Memo> memos = memoRepositoryqdsl.searchMemo();
         return new ResponseEntity<>(memos, HttpStatus.OK);
     }

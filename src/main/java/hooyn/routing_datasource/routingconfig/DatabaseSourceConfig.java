@@ -75,17 +75,14 @@ public class DatabaseSourceConfig {
     }
 
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(
-            EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
         return builder.dataSource(dataSource())
                 .packages(User.class)
-                .packages(Memo.class)
                 .build();
     }
 
     @Bean(name = "transactionManager")
-    public JpaTransactionManager transactionManager(
-            @Autowired @Qualifier("entityManagerFactory") LocalContainerEntityManagerFactoryBean entityManagerFactoryBean) {
+    public JpaTransactionManager transactionManager(@Autowired @Qualifier("entityManagerFactory") LocalContainerEntityManagerFactoryBean entityManagerFactoryBean) {
         return new JpaTransactionManager(entityManagerFactoryBean.getObject());
     }
 }
